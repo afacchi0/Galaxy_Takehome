@@ -55,8 +55,12 @@ kubectl run -it --rm --image=busybox:1.28 dns-test --restart=Never -- sh
 # Inside the pod
 wget -qO- http://flask-app-service.default.svc.cluster.local:80
 # Returns: Hello World!
+sudo minikube tunnel
+# On a separate terminal
+curl -H "Host: flask-app.local" http://127.0.0.1
+# Returns: Hello World!
 ```
 
-### Note
+### ~~Note~~
 
-The application responds on the / route. I’ve verified this within the cluster using a test pod and also configured ingress to expose it at http://flask-app.local/. While minikube tunnel was running and DNS was configured, external curl requests still hung, likely due to a Minikube networking issue. In a cloud environment with managed ingress, this would be resolvable.
+~~The application responds on the / route. I’ve verified this within the cluster using a test pod and also configured ingress to expose it at http://flask-app.local/. While minikube tunnel was running and DNS was configured, external curl requests still hung, likely due to a Minikube networking issue. In a cloud environment with managed ingress, this would be resolvable.~~
